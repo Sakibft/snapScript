@@ -77,37 +77,27 @@ const Login = () => {
                 Login
               </button>
             </form>
-            <div className="flex items-center pt-4 space-x-2">
+            {/* <div className="flex items-center pt-4 space-x-2">
               <div className="flex-1 h-px bg-gray-300"></div>
               <p className="text-sm text-[#8EA7E9]">
                 Login with social accounts
               </p>
               <div className="flex-1 h-px bg-gray-300"></div>
+            </div> */}
+             {/* divider  */}
+          <div className="my-8 flex items-center px-8">
+              <hr className="flex-1" />
+              <div className="mx-4 text-gray-400">OR</div>
+              <hr className="flex-1" />
             </div>
-            {/* Social icons */}
-            <div className="flex justify-center space-x-8 mt-3">
-              <button
-    
-                aria-label="Log in with Google"
-                className="p-2 rounded-full hover:bg-[#8EA7E9]"
-              >
-                <AiFillGoogleCircle className="text-[#8EA7E9] hover:text-white text-4xl" />
-              </button>
-              <button
-                
-                aria-label="Log in with GitHub"
-                className="p-3 rounded-full hover:bg-[#8EA7E9]"
-              >
-                <VscGithub className="text-[#8EA7E9] hover:text-white text-3xl" />
-              </button>
 
-               
-               <button
-                aria-label="Log in with Twitter"
-                className="p-3 rounded-full hover:bg-[#8EA7E9]"
-              >
-                <RiFacebookCircleLine className="text-[#8EA7E9] hover:text-white text-3xl"/>
-              </button> 
+             {/* sign with google */}
+             <div className="mx-auto flex h-[50px] w-[200px] items-center overflow-hidden rounded-full shadow-md duration-300 hover:scale-95 hover:shadow">
+              <div className="flex h-full w-[50%] items-center bg-[#8EA7E9] pl-4 text-sm text-white">
+                Sign With
+              </div>
+              <span className="right-0 top-0 h-0 w-0 -rotate-90 border-b-[50px] border-r-[50px] border-b-transparent border-r-[#8EA7E9] group-hover:hidden"></span>
+              <span className="pr-4 text-4xl font-bold text-[#8EA7E9]">G+</span>
             </div>
           </div>
         </div>
