@@ -7,11 +7,13 @@ import FeaturedBlogs from "../pages/FeaturedBlogs";
 import Wishlist from "../pages/Wishlist";
 import Register from "../pages/Authentication/Register";
 import Login from "../pages/Authentication/Login";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element:<Rot></Rot>,
+    errorElement:<Error></Error>,
    children:[
     {
       path:"/",
