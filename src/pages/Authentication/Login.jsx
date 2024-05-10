@@ -1,14 +1,65 @@
 import { useState } from "react";
-import { AiFillGoogleCircle } from "react-icons/ai";
+import toast from "react-hot-toast";
+ 
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import { RiFacebookCircleLine } from "react-icons/ri";
-import { VscGithub } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+ 
+ 
+import { Link,   } from "react-router-dom";
+import UseAuth from "../../hooks/UseAuth";
 
  
 
 const Login = () => {
+  const {loginUser,loginWithGoogle}=UseAuth()
   const [showPassword, setShowPassword] = useState(false);
+  const [error,setError]=useState();
+  const [success,setSuccess]=useState();
+  const[googleLogin,setGoogleLogin]=useState();
+  const [googleError,setGoogleError]=useState();
+   // loginWithGoogle
+   if (googleLogin) {
+    toast.success("Successfully login with google");
+  }
+  if (googleError) {
+    toast.error(error);
+  }
+
+// Login
+  if (error) {
+    toast.error(error);
+  }
+  if (success) {
+    toast.success("Successfully Login !");
+  }
+
+  const handleLogin = (e) => {
+    // login
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const email = form.get("email");
+    const password = form.get("password");
+    setError("");
+    setSuccess("");
+    loginUser(email, password)
+      .then((result) => {
+        setSuccess('success');
+        console.log(result);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+  const handleGoogle = () => {
+    loginWithGoogle()
+      .then((result) => {
+        console.log(result);
+        setGoogleLogin('success');
+      })
+      .catch((error) => {
+        setGoogleError(error.message);
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -28,7 +79,7 @@ const Login = () => {
               Login Now !
             </h2>
             <form
-        
+        onSubmit={handleLogin}
               className="flex  w-full flex-col items-center justify-center gap-4"
             >
               <input
@@ -92,7 +143,9 @@ const Login = () => {
             </div>
 
              {/* sign with google */}
-             <div className="mx-auto flex h-[50px] w-[200px] items-center overflow-hidden rounded-full shadow-md duration-300 hover:scale-95 hover:shadow">
+             <div 
+             onClick={handleGoogle}
+             className="mx-auto flex h-[50px] w-[200px] items-center overflow-hidden rounded-full shadow-md duration-300 hover:scale-95 hover:shadow">
               <div className="flex h-full w-[50%] items-center bg-[#8EA7E9] pl-4 text-sm text-white">
                 Sign With
               </div>

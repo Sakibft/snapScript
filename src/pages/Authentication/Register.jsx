@@ -1,11 +1,65 @@
 import { useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
+import UseAuth from "../../hooks/UseAuth";
+import toast from "react-hot-toast";
 
  
 
 const Register = () => {
+  const {createUser,updateUserProfile}=UseAuth()
   const [showPassword, setShowPassword] = useState(false);
+  const [error,setError]=useState();
+  const [success,setSuccess]=useState();
+  if (success) {
+    toast.success('Register completed !')
+ 
+  }
+  if (error) {
+    toast.error(error)
+    }
+    console.log(error);
+    console.log(success);
+
+
+  const handleRegister = (e) => {
+    // reset erro
+    setError("");
+    setSuccess("");
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const name = form.get("name");
+    const email = form.get("email");
+    const password = form.get("password");
+    const photoURL = form.get("photo");
+    console.log(name,photoURL,email,password);
+    if (password.length < 6) {
+      setError("Password should be at least 6 characters");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      setError("Must have one uppercase letter  ");
+      return;
+    }
+    if (!/[^\w\s]/.test(password)) {
+      setError("Must have one special character");
+      return;
+  }
+    if(/^\D*$/.test(password)) {
+      setError("Must have one numeric character")
+      return;
+    }
+    console.log(password);
+    createUser(email, password,name,photoURL)
+      .then((result) => {
+        setSuccess(result);
+        updateUserProfile(name,photoURL)
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+    console.log(email);
+  };
   return (
     <div>
       <div className="container mx-auto">
@@ -34,7 +88,7 @@ const Register = () => {
               Register Here
             </h2>
             <form
-            
+            onSubmit={handleRegister}
               className="flex  w-full flex-col items-center justify-center gap-4"
             >
               <input
