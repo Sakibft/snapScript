@@ -18,12 +18,12 @@ const AllBlogs = () => {
      getData()
   }, [filter,search]);
 
-  console.log(blogs);
+  // console.log(blogs);
   const handleSearch = e => {
     e.preventDefault();
     const text = e.target.search.value;
     setSearch(text);
-    console.log(text);
+    // console.log(text);
   }
   return (
     <div>
@@ -74,34 +74,37 @@ const AllBlogs = () => {
       </div>
     <div className="grid grid-cols-3 justify-around container mx-auto gap-y-3">
       {blogs &&
-        blogs.map((item) => (
-          <>
+        blogs.map((item) =>{
+          console.log(item.image);
+          return (
+            <>
           
-           <div className="flex justify-center items-center">
-           <div className="card w-96 bg-base-100 shadow-xl">
-              <figure>
+            <div className="flex justify-center items-center">
+            <div className="card w-96 bg-base-100 shadow-xl">
              
-                <img
-                  src={item?.image}
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{item.category}</h2>
-                <p>{item.title}</p>
-                <p>{item.shortDescription}</p>
-                <div className="card-actions justify-end">
-                 <Link to={`/details/${item._id}`}>
-                 <button className="btn btn-primary">Details</button>
-                 </Link>
-                  <button className="btn btn-primary">Wishlist</button>
-                </div>
-              </div>
+              
+                 <img
+               className="h-52 w-full"
+                   src={item.image}
+                   alt="Shoes"
+                 />
+                <div className="card-body">
+                 <h2 className="card-title">{item.category}</h2>
+                 <p>{item.title}</p>
+                 <p>{item.shortDescription}</p>
+                 <div className="card-actions justify-end">
+                  <Link to={`/details/${item._id}`}>
+                  <button className="btn btn-primary">Details</button>
+                  </Link>
+                   <button className="btn btn-primary">Wishlist</button>
+                 </div>
+               </div>
+             </div>
             </div>
-           </div>
-          </>
-        ))}
-      <h1>all blogs</h1>
+           </>
+          )
+        })}
+ 
     </div>
     </div>
   );

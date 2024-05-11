@@ -7,42 +7,6 @@ const AddBlog = () => {
     const {user}=UseAuth()
     console.log(user);
 
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-    //     const email = e.target.email.value;
-    //     const category = e.target.category.value;
-    //     const title = e.target.title.value;
-    //     const shortDescription = e.target.shortDescription.value;
-    //     const longDescription = e.target.longDescription.value;
-       
-    //     const blogs = {
-    //       email: email,
-    //       category: category,
-    //       title: title,
-    //       shortDescription: shortDescription,
-    //       longDescription: longDescription
-    //     };
-      
-    //     console.log(blogs);
-      
-    //     fetch(`${import.meta.env.VITE_API_URL}/blogs`, {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(blogs)
-    //     })
-    //       .then(response => response.json())
-    //       .then(data => {
-    //         console.log('Data successfully posted:', data);
-    //       })
-    //       .catch(error => {
-    //         console.error('Error posting data:', error);
-    //       });
-    //   };
-      
- 
-
       const handleSubmit = e => {
         e.preventDefault();
         const email = e.target.email.value;
