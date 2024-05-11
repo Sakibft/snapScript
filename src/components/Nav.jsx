@@ -44,9 +44,9 @@ const Nav = () => {
           ? "text-white  lg:px-2 py-2 bg-[#8EA7FF] rounded-md p-3  font-semibold text-2xl  "
           : "font-semibold text-2xl  "
       }
-      to="/addblogs"
+      to="/allblog"
     >
-      Add Blogs
+    All Blog
     </NavLink>
     <NavLink
       className={({ isActive }) =>
@@ -54,10 +54,11 @@ const Nav = () => {
           ? "text-white  lg:px-2 py-2 bg-[#8EA7FF] rounded-md p-3  font-semibold text-2xl  "
           : "font-semibold text-2xl  "
       }
-      to="/allblog"
+      to="/addblogs"
     >
-    All Blog
+      Add Blogs
     </NavLink>
+
     <NavLink
       className={({ isActive }) =>
         isActive
