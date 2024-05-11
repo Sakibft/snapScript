@@ -8,6 +8,7 @@ import Wishlist from "../pages/Wishlist";
 import Register from "../pages/Authentication/Register";
 import Login from "../pages/Authentication/Login";
 import Error from "../pages/Error";
+import Details from "../pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
       path:"/login",
       element:<Login></Login>
     },
+    {
+      path:"/details/:id",
+      element:<Details></Details>,
+      loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/blogs/${params.id}`)
+    }
 
    ]
     

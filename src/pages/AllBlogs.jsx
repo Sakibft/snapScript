@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState();
@@ -39,8 +40,10 @@ const AllBlogs = () => {
             >
               <option value=''>Filter By Category</option>
               <option value='Technology'>Technology</option>
-              <option value='Politics'>Politics</option>
-              <option value='Digital Marketing'>Digital Marketing</option>
+              <option value='Sports'>Sports</option>
+              <option value='Game'>Game</option>
+              <option value='Travel'>Travel</option>
+              <option value='Health'>Health</option>
             </select>
           </div>
 
@@ -77,8 +80,9 @@ const AllBlogs = () => {
            <div className="flex justify-center items-center">
            <div className="card w-96 bg-base-100 shadow-xl">
               <figure>
+             
                 <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                  src={item?.image}
                   alt="Shoes"
                 />
               </figure>
@@ -87,7 +91,9 @@ const AllBlogs = () => {
                 <p>{item.title}</p>
                 <p>{item.shortDescription}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Details</button>
+                 <Link to={`/details/${item._id}`}>
+                 <button className="btn btn-primary">Details</button>
+                 </Link>
                   <button className="btn btn-primary">Wishlist</button>
                 </div>
               </div>
