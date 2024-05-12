@@ -2,12 +2,15 @@ import axios from "axios";
 import { FirebaseError } from "firebase/app";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../../hooks/UseAuth";
 
 const RecentBlog = () => {
  
   const [blogs, setBlogs] = useState([]);
   const [filter, setFilter] = useState([]);
   const [search, setSearch] = useState([]);
+  const {user}=UseAuth();
+  const userEmail = user?.email;
   const fistSidData = blogs.slice(3,9)
   // console.log(fistSidData);
   useEffect(() => {
@@ -21,6 +24,27 @@ const RecentBlog = () => {
     };
     getData();
   }, [filter, search]);
+
+// post wishlist
+  const handleWishlist = item =>{
+    const {category,image,longDescription,shortDescription,title}=item;
+    const wishKor = {userEmail,category,image,longDescription,shortDescription,title}
+    console.log(wishKor);
+    axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log('Data successfully posted:', response.data);
+      })
+      .catch(error => {
+        console.error('Error posting data:', error);
+      });
+
+    console.log(item);
+  }
+
   // console.log(blogs);
   // const firstSixData = user.slice(0,8);
   return (
@@ -48,7 +72,7 @@ const RecentBlog = () => {
                           <Link to={`/details/${item._id}`}>
                             <button className="btn text-[#F50057] border-[#F50057] bg-white">Details</button>
                           </Link>
-                          <button className="btn border-primary text-primary bg-white">Wishlist</button>
+                          <button onClick={()=>handleWishlist(item)} className="btn border-primary text-primary bg-white">Wishlist</button>
                         </div>
                       </div>
                     </div>
