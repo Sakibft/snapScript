@@ -27,6 +27,9 @@ const Details = () => {
             )}
           </div>
         </div>
+        <div>
+          hahah
+        </div>
       </div>
     </div>
   );

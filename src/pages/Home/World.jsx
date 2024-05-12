@@ -11,7 +11,7 @@ const World = () => {
   const [filter, setFilter] = useState([]);
   const [search, setSearch] = useState([]);
   const fistSidData = blogs.slice(11,13)
-  console.log(fistSidData);
+  // console.log(fistSidData);
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
@@ -23,7 +23,7 @@ const World = () => {
     };
     getData();
   }, [filter, search]);
-  console.log(blogs);
+  // console.log(blogs);
   return (
     <div className="mt-10 mb-10 w-[50%]   mx-auto">
        <h1 className="font-bold text-lg mb-[-10px] ">World News</h1>
@@ -41,6 +41,7 @@ const World = () => {
                   <div className="flex justify-center items-center">
                     <div className="card w-full bg-base-100 shadow-xl">
                       <img
+                      className="h-96"
                          src={item.image}
                         alt="Shoes"
                       />

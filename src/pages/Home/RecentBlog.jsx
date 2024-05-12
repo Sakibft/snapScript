@@ -9,7 +9,7 @@ const RecentBlog = () => {
   const [filter, setFilter] = useState([]);
   const [search, setSearch] = useState([]);
   const fistSidData = blogs.slice(3,9)
-  console.log(fistSidData);
+  // console.log(fistSidData);
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
@@ -21,13 +21,13 @@ const RecentBlog = () => {
     };
     getData();
   }, [filter, search]);
-  console.log(blogs);
+  // console.log(blogs);
   // const firstSixData = user.slice(0,8);
   return (
     <div>
       <h1 className="text-center text-3xl font-bold mt-10 mb-10">Recent blog</h1>
       <div>
-        <div className="grid grid-cols-3 justify-around container mx-auto gap-y-3">
+        <div className="grid lg:grid-cols-3 justify-around container mx-auto gap-y-3">
           {fistSidData &&
             fistSidData.map((item) => {
               // console.log(item.image);

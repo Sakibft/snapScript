@@ -2,11 +2,17 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../hooks/UseAuth";
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState();
   const [filter, setFilter] = useState([]);
   const [search, setSearch] = useState([]);
+  const {user}=UseAuth();
+  const userEmail = user?.email;
+ 
+ 
+ 
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
@@ -15,7 +21,7 @@ const AllBlogs = () => {
         }/blogs?filter=${filter}&search=${search}`
       );
       setBlogs(data);
-    };
+  };
     getData();
   }, [filter, search]);
 
@@ -26,6 +32,25 @@ const AllBlogs = () => {
     setSearch(text);
     // console.log(text);
   };
+  // post wishlist in all blog page 
+  const handleWishlist = item =>{
+    const {category,image,longDescription,shortDescription,title,_id}=item;
+    const wishKor = {userEmail,category,image,longDescription,shortDescription,title,_id}
+    console.log(wishKor);
+    axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log('Data successfully posted:', response.data);
+      })
+      .catch(error => {
+        console.error('Error posting data:', error);
+      });
+
+    console.log(item);
+  }
   return (
     <div>
       <div>
@@ -43,6 +68,7 @@ const AllBlogs = () => {
               <option value="Sports">Sports</option>
               <option value="Game">Game</option>
               <option value="Travel">Travel</option>
+              <option value="Politics">Politics</option>
               <option value="Health">Health</option>
             </select>
           </div>
@@ -65,10 +91,10 @@ const AllBlogs = () => {
           <div></div>
         </div>
       </div>
-      <div className="grid grid-cols-3 justify-around container mx-auto gap-y-3">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-around container mx-auto gap-y-3">
         {blogs &&
           blogs.map((item) => {
-            console.log(item.image);
+            // console.log(item.image);
             return (
               <>
                 <div className="flex justify-center items-center">
@@ -82,7 +108,7 @@ const AllBlogs = () => {
                         <Link to={`/details/${item._id}`}>
                           <button className="btn btn-primary">Details</button>
                         </Link>
-                        <button className="btn btn-primary">Wishlist</button>
+                        <button onClick={()=>handleWishlist(item)} className="btn btn-primary">Wishlist</button>
                       </div>
                     </div>
                   </div>
