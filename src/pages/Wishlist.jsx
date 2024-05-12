@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UseAuth from "../hooks/UseAuth";
+import { Link } from "react-router-dom";
+import { MdOutlineDelete } from "react-icons/md";
 
 const Wishlist = () => {
   const [wish, setWish] = useState();
+ const [dlt, setDlt] = useState();
+ console.log(dlt);
   const { user } = UseAuth();
   //  console.log(user,'shsh');
   console.log(wish);
@@ -17,6 +21,20 @@ const Wishlist = () => {
     };
     getData();
   }, [user]);
+  const handeDelete = async (_id) => {
+ 
+      const getData = async () => {
+      
+        const { data } = await axios.delete(
+          `${import.meta.env.VITE_API_URL}/delete/${_id}`
+        );
+        setDlt(data.data);
+        console.log(data,'hahahah');
+      };
+      getData();
+    
+    console.log(_id);
+  }
 
   return (
     <div>
@@ -31,10 +49,10 @@ const Wishlist = () => {
                   <p>{item.title}</p>
                   <p>{item.shortDescription}</p>
                   <div className="card-actions justify-end">
-                    {/* <Link to={`/details/${item._id}`}>
-                          <button className="btn btn-primary">Details</button>
+                    <Link to={`/details/${item._id}`}>
+                          <button className="btn border-primary text-primary bg-white">Details</button>
                         </Link>
-                        <button onClick={()=>handleWishlist(item)} className="btn btn-primary">Wishlist</button> */}
+                        <button onClick={()=>handeDelete(item._id)}  className="btn text-2xl border border-[#F50057] text-[#F50057] bg-white"><MdOutlineDelete /></button>
                   </div>
                 </div>
               </div>

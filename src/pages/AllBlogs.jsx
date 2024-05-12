@@ -29,13 +29,14 @@ const AllBlogs = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const text = e.target.search.value;
+    console.log(text);
     setSearch(text);
     // console.log(text);
   };
   // post wishlist in all blog page 
   const handleWishlist = item =>{
-    const {category,image,longDescription,shortDescription,title,_id}=item;
-    const wishKor = {userEmail,category,image,longDescription,shortDescription,title,_id}
+    const {category,image,longDescription,shortDescription,title}=item;
+    const wishKor = {userEmail,category,image,longDescription,shortDescription,title}
     console.log(wishKor);
     axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
       headers: {
@@ -106,9 +107,9 @@ const AllBlogs = () => {
                       <p>{item.shortDescription}</p>
                       <div className="card-actions justify-end">
                         <Link to={`/details/${item._id}`}>
-                          <button className="btn btn-primary">Details</button>
+                          <button className="btn border-[#F50057] text-[#F50057] bg-white">Details</button>
                         </Link>
-                        <button onClick={()=>handleWishlist(item)} className="btn btn-primary">Wishlist</button>
+                        <button onClick={()=>handleWishlist(item)} className="btn border-primary bg-white text-primary">Wishlist</button>
                       </div>
                     </div>
                   </div>

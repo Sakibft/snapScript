@@ -31,7 +31,7 @@ const Nav = () => {
     <NavLink
       className={({ isActive }) =>
         isActive
-          ? "text-white  lg:px-2 py-2 bg-[#8EA7FF] rounded-md p-3  font-semibold text-2xl  "
+          ? "text-primary  border-b lg:px-2 py-2 border-primary rounded-md p-3  font-semibold text-2xl  "
           : "font-semibold text-2xl  "
       }
       to="/"
@@ -41,7 +41,7 @@ const Nav = () => {
     <NavLink
       className={({ isActive }) =>
         isActive
-          ? "text-white  lg:px-2 py-2 bg-[#8EA7FF] rounded-md p-3  font-semibold text-2xl  "
+          ? "text-primary  border-b lg:px-2 py-2 border-primary rounded-md p-3  font-semibold text-2xl  "
           : "font-semibold text-2xl  "
       }
       to="/allblog"
@@ -51,7 +51,7 @@ const Nav = () => {
     <NavLink
       className={({ isActive }) =>
         isActive
-          ? "text-white  lg:px-2 py-2 bg-[#8EA7FF] rounded-md p-3  font-semibold text-2xl  "
+          ? "text-primary  border-b lg:px-2 py-2 border-primary rounded-md p-3  font-semibold text-2xl  "
           : "font-semibold text-2xl  "
       }
       to="/addblogs"
@@ -62,7 +62,7 @@ const Nav = () => {
     <NavLink
       className={({ isActive }) =>
         isActive
-          ? "text-white  lg:px-2 py-2 bg-[#8EA7FF] rounded-md p-3  font-semibold text-2xl  "
+          ? "text-primary  border-b lg:px-2 py-2 border-primary rounded-md p-3  font-semibold text-2xl  "
           : "font-semibold text-2xl  "
       }
       to="/featuredblogs"
@@ -72,7 +72,7 @@ const Nav = () => {
     <NavLink
       className={({ isActive }) =>
         isActive
-          ? "text-white  lg:px-2 py-2 bg-[#8EA7FF] rounded-md p-3  font-semibold text-2xl  "
+          ? "text-primary  border-b lg:px-2 py-2 border-primary rounded-md p-3  font-semibold text-2xl  "
           : "font-semibold text-2xl  "
       }
       to="/wishlist"

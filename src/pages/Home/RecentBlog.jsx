@@ -46,9 +46,9 @@ const RecentBlog = () => {
                         <p>{item.shortDescription}</p>
                         <div className="card-actions justify-end">
                           <Link to={`/details/${item._id}`}>
-                            <button className="btn btn-primary">Details</button>
+                            <button className="btn text-[#F50057] border-[#F50057] bg-white">Details</button>
                           </Link>
-                          <button className="btn btn-primary">Wishlist</button>
+                          <button className="btn border-primary text-primary bg-white">Wishlist</button>
                         </div>
                       </div>
                     </div>
