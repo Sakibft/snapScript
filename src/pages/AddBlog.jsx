@@ -6,7 +6,9 @@ import UseAuth from "../hooks/UseAuth";
 const AddBlog = () => {
     const {user}=UseAuth()
     console.log(user);
-
+     const ownerPhoto = user?.photoURL
+    const owner = user?.displayName
+    console.log(ownerPhoto,owner, 'jajahha');
       const handleSubmit = e => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -22,7 +24,9 @@ const AddBlog = () => {
           title: title,
           shortDescription: shortDescription,
           longDescription: longDescription,
-          image:image
+          image:image,
+          owner:owner,
+          ownerPhoto:ownerPhoto
         };
       
         console.log(blogs);

@@ -11,7 +11,7 @@ const AllBlogs = () => {
   const {user}=UseAuth();
   const userEmail = user?.email;
  
- 
+ console.log(blogs);
  
   useEffect(() => {
     const getData = async () => {
