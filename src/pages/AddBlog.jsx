@@ -45,31 +45,7 @@ const AddBlog = () => {
       };
       
 
-// const handleSubmit = e => {
-//     e.preventDefault();
-//     const email = e.target.email.value;
-//     const category = e.target.category.value;
-//     const title = e.target.title.value;
-//     const shortDescription = e.target.shortDescription.value;
-//     const longDescription = e.target.longDescription.value;
-//     const photo = e.target.photo.value; // Get the file object
-    
-//     const formData = new FormData();
-//     formData.append('email', email);
-//     formData.append('category', category);
-//     formData.append('title', title);
-//     formData.append('shortDescription', shortDescription);
-//     formData.append('longDescription', longDescription);
-//     formData.append('photo', photo);
-//   console.log(formData);
-//     axios.post(`${import.meta.env.VITE_API_URL}/blogs`, formData)
-//       .then(response => {
-//         console.log('Data successfully posted:', response.data);
-//       })
-//       .catch(error => {
-//         console.error('Error posting data:', error);
-//       });
-//   };
+ 
   return (
     <div className="container mx-auto">
     <form onSubmit={handleSubmit} >

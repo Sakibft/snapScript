@@ -3,24 +3,29 @@ import { useEffect, useState } from "react";
 import UseAuth from "../hooks/UseAuth";
 import { Link } from "react-router-dom";
 import { MdOutlineDelete } from "react-icons/md";
+import useAxiosSecure from "../components/useAxiosSecure";
 
 const Wishlist = () => {
   const [wish, setWish] = useState();
  const [dlt, setDlt] = useState();
  console.log(dlt);
+ const axiosSecure = useAxiosSecure();
   const { user } = UseAuth();
   //  console.log(user,'shsh');
   console.log(wish);
+  const url = `/wish/${user?.email}`
   useEffect(() => {
-    const getData = async () => {
+    // const getData = async () => {
     
-      const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/wish/${user?.email}`
-      );
-      setWish(data);
-    };
-    getData();
-  }, [user]);
+    //   const { data } = await axios(
+    //     `${import.meta.env.VITE_API_URL}/wish/${user?.email}`,{withCredentials:true}
+    //   );
+    //   setWish(data);
+    // };
+    // getData();
+    axiosSecure.get(url)
+    .then(res => setWish(res.data))
+  }, [url,axiosSecure]);
   const handeDelete = async (_id) => {
  
       const getData = async () => {

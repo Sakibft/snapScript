@@ -1,7 +1,8 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, linkWithCredential, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
  
 const Provider = new GoogleAuthProvider();
 export const AuthenticationContext = createContext();
@@ -46,14 +47,37 @@ const AuthContextComponent = ({children}) => {
   
     useEffect(()=>{
   const unSubsCribe = onAuthStateChanged(auth,currentUser => {
-    if(currentUser){
+    const userEmail = currentUser?.email || user?.email ;
+const loggedUser = {email: userEmail}
+ 
       setUser(currentUser)
       setLoading(false);
-    }
-    else{
-      setUser(null)
-      setLoading(false)
-    }
+   
+    // if user exists then issue a token
+    if(currentUser){
+      axios.post(`${import.meta.env.VITE_API_URL}/jwt`,loggedUser, {
+       withCredentials:true
+     })   
+      .then(res => {
+       console.log('token response',res.data);
+      })
+      .catch(error => {
+       console.log(error);
+      })
+     }
+     else{
+       axios.post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser , {
+         withCredentials:true
+       })
+       .then(res => {
+         console.log(res.data);
+       })
+       .catch(error => {
+
+         console.log('token error',error);
+       }
+       )
+     }
    });
    return ()  => {
     unSubsCribe();
