@@ -3,28 +3,46 @@ import { FirebaseError } from "firebase/app";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UseAuth from "../../hooks/UseAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const RecentBlog = () => {
  
-  const [blogs, setBlogs] = useState([]);
-  const [filter, setFilter] = useState([]);
-  const [search, setSearch] = useState([]);
+  // const [blogs, setBlogs] = useState([]);
+  // const [filter, setFilter] = useState([]);
+  // const [search, setSearch] = useState([]);
   const {user}=UseAuth();
   const userEmail = user?.email;
-  const fistSidData = blogs.slice(3,9)
+  // const fistSidData = blogs.slice(3,9)
   // console.log(fistSidData);
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios(
-        `${
-          import.meta.env.VITE_API_URL
-        }/blogs?filter=${filter}&search=${search}`
-      );
-      setBlogs(data);
-    };
-    getData();
-  }, [filter, search]);
 
+
+  const {data : blogs ,isLoading,refetch,isError,error} = useQuery({
+    queryFn: () => getData(),
+    queryKey:['allBlogData']
+   })
+ console.log(blogs);
+   const getData = async () => {
+    const { data } = await axios(
+      `${
+        import.meta.env.VITE_API_URL
+      }/blogs`
+    )
+    return data
+  };
+  const SixData = blogs?.slice(3,9)
+console.log(SixData);
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const { data } = await axios(
+  //       `${
+  //         import.meta.env.VITE_API_URL
+  //       }/blogs?filter=${filter}&search=${search}`
+  //     );
+  //     setBlogs(data);
+  //   };
+  //   getData();
+  // }, [filter, search]);
 // post wishlist
   const handleWishlist = item =>{
     const {category,image,longDescription,shortDescription,title}=item;
@@ -52,8 +70,8 @@ const RecentBlog = () => {
       <h1 className="text-center text-3xl font-bold  mb-10">Recent blog</h1>
       <div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-around container mx-auto gap-y-3">
-          {fistSidData &&
-            fistSidData.map((item) => {
+          {SixData &&
+            SixData.map((item) => {
               // console.log(item.image);
               return (
                 <>

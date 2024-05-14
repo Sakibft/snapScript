@@ -1,13 +1,27 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UseAuth from "../hooks/UseAuth";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const Details = () => {
-  const data = useLoaderData();
-console.log(data);
-  const { user } = UseAuth();
   const [comment, setComment] = useState();
+  const {id} = useParams();
+  // console.log(id,'useParams');
+const {data} = useQuery({
+  queryFn:()=> getData(),
+  queryKey:['details',id],
+  initialData:[]
+})
+const getData = async () => {
+  const {data} = await axios(`${import.meta.env.VITE_API_URL}/blogs/${id}`)
+  return data ;
+}
+
+
+  // const data = useLoaderData();
+console.log(data,'details');
+  const { user } = UseAuth();
   console.log(comment);
   const _id = data?._id;
   const photo = user?.photoURL;
@@ -16,8 +30,8 @@ console.log(data);
   // console.log(email,name);
   // console.log(data?.email, "data base email");
   // console.log(user?.email, "login user");
-
   // post comment
+
   const handleComment = (e) => {
     e.preventDefault();
     const comment = e.target.comment.value;
@@ -46,7 +60,7 @@ console.log(data);
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [_id]);
   return (
     <div className="flex justify-center items-center">
       <div className="card md:w-1/2  bg-base-100 shadow-xl">

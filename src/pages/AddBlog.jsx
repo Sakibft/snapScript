@@ -16,13 +16,11 @@ const AddBlog = () => {
 
       const handleSubmit = e => {
         e.preventDefault();
- 
         const category = e.target.category.value;
         const title = e.target.title.value;
         const shortDescription = e.target.shortDescription.value;
         const longDescription = e.target.longDescription.value;
         const image = e.target.photo.value;
-      
         const blogs = {
           email: email,
           category: category,
@@ -33,9 +31,7 @@ const AddBlog = () => {
           owner:owner,
           ownerPhoto:ownerPhoto
         };
-      
         console.log(blogs);
-      
         axios.post(`${import.meta.env.VITE_API_URL}/blogs`, blogs, {
           headers: {
             'Content-Type': 'application/json'

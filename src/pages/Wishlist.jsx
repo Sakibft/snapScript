@@ -4,28 +4,40 @@ import UseAuth from "../hooks/UseAuth";
 import { Link } from "react-router-dom";
 import { MdOutlineDelete } from "react-icons/md";
 import useAxiosSecure from "../components/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Wishlist = () => {
-  const [wish, setWish] = useState();
+  // const [wish, setWish] = useState();
  const [dlt, setDlt] = useState();
  console.log(dlt);
  const axiosSecure = useAxiosSecure();
   const { user } = UseAuth();
   //  console.log(user,'shsh');
-  console.log(wish);
+  // console.log(wish);
   const url = `/wish/${user?.email}`
-  useEffect(() => {
-    // const getData = async () => {
+
+
+  const {data : wish } = useQuery({
+    queryFn : () => getData() ,
+    queryKey: ['wishData']
+  })
+  console.log(wish);
+  const getData =  async () => {
+const {data} = await axiosSecure.get(url)
+return data;
+  }
+  // useEffect(() => {
+  //   // const getData = async () => {
     
-    //   const { data } = await axios(
-    //     `${import.meta.env.VITE_API_URL}/wish/${user?.email}`,{withCredentials:true}
-    //   );
-    //   setWish(data);
-    // };
-    // getData();
-    axiosSecure.get(url)
-    .then(res => setWish(res.data))
-  }, [url,axiosSecure]);
+  //   //   const { data } = await axios(
+  //   //     `${import.meta.env.VITE_API_URL}/wish/${user?.email}`,{withCredentials:true}
+  //   //   );
+  //   //   setWish(data);
+  //   // };
+  //   // getData();
+  //   axiosSecure.get(url)
+  //   .then(res => setWish(res.data))
+  // }, [url,axiosSecure]);
   const handeDelete = async (_id) => {
  
       const getData = async () => {

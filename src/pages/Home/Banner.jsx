@@ -9,7 +9,7 @@ const Banner = () => {
             className='rounded-xl w-full h-[70%]'
            />
           <div className="absolute   w-full  h-[80%] flex justify-center items-center">
-          <h1>hahah</h1>
+          <h1 className='text-center md:text-4xl text-lg font-bold text-white'>Embark on a journey of discovery.  Explore our blog for thought-provoking <br /> content that ignites imagination and fosters personal development .<br />Start exploring now !</h1>
           </div>
         </div>
       </div>

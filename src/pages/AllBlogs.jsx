@@ -3,29 +3,48 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import UseAuth from "../hooks/UseAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const AllBlogs = () => {
-  const [blogs, setBlogs] = useState();
-  const [filter, setFilter] = useState([]);
-  const [search, setSearch] = useState([]);
+  // const [blogs, setBlogs] = useState();
+  const [filter, setFilter] = useState('');
+  const [search, setSearch] = useState('');
+  // console.log(filter);
   const {user}=UseAuth();
   const userEmail = user?.email;
- 
- console.log(blogs);
- 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios(
-        `${
-          import.meta.env.VITE_API_URL
-        }/blogs?filter=${filter}&search=${search}`
-      );
-      setBlogs(data);
-  };
-    getData();
-  }, [filter, search]);
+//  console.log(blogs);
 
+ const {data : blogs  ,isLoading,refetch,isError,error} = useQuery({
+  queryFn: () => getData() ,
+  queryKey:['allBlogData', filter, search ]
+ })
+// console.log(blogs);
+console.log(isLoading);
+// if(isLoading){
+//   return <h1>loading........</h1>
+// }
+ const getData = async () => {
+  const { data } = await axios(
+    `${
+      import.meta.env.VITE_API_URL
+    }/blogs?filter=${filter}&search=${search}`
+  )
+  return data
+};
+ 
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const { data } = await axios(
+  //       `${
+  //         import.meta.env.VITE_API_URL
+  //       }/blogs?filter=${filter}&search=${search}`
+  //     );
+  //     setBlogs(data);
+  // };
+  //   getData();
+  // }, [filter, search]);
   // console.log(blogs);
+
   const handleSearch = (e) => {
     e.preventDefault();
     const text = e.target.search.value;

@@ -1,36 +1,40 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
+import { useQuery } from "@tanstack/react-query";
  
 
 const World = () => {
-
-
-  const [blogs, setBlogs] = useState([]);
-  const [filter, setFilter] = useState([]);
-  const [search, setSearch] = useState([]);
-  const fistSidData = blogs.slice(11,13)
-  // console.log(fistSidData);
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios(
-        `${
-          import.meta.env.VITE_API_URL
-        }/blogs?filter=${filter}&search=${search}`
-      );
-      setBlogs(data);
-    };
-    getData();
-  }, [filter, search]);
+const {data} = useQuery({
+  queryFn: () => getData() ,
+  queryKey:['politicsData']
+})
+// console.log(data);
+const fistSidData = data?.slice(11,13)
+const getData = async () => {
+  const { data } = await axios(
+    `${
+      import.meta.env.VITE_API_URL
+    }/blogs`
+  )
+  return data;
+}
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const { data } = await axios(
+  //       `${
+  //         import.meta.env.VITE_API_URL
+  //       }/blogs?filter=${filter}&search=${search}`
+  //     );
+  //     setBlogs(data);
+  //   };
+  //   getData();
+  // }, [filter, search]);
   // console.log(blogs);
   return (
     <div className="mt-10 mb-10 md:w-[50%] w-[80%]   mx-auto">
        <h1 className="font-bold text-lg mb-[-10px] ">World News</h1>
        <progress className="progress progress-error w-[40%] h-1" value="30" max="100"></progress>
-
-
-
        <div>
             <div className="grid grid-cols-1 gap-y-3">
           {fistSidData &&
@@ -53,7 +57,6 @@ const World = () => {
                           <Link to={`/details/${item._id}`}>
                             <button className=" text-[#F50057] text-xl "><FaArrowRight /></button>
                           </Link>
-                          
                         </div>
                       </div>
                     </div>

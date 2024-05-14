@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/featuredblogs",
-        element: <FeaturedBlogs></FeaturedBlogs>,
+        element: <FeaturedBlogs></FeaturedBlogs> ,
       },
       {
         path: "/wishlist",
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <Details></Details>,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/blogs/${params.id}`),
+        // loader: ({ params }) =>
+        //   fetch(`${import.meta.env.VITE_API_URL}/blogs/${params.id}`),
       },
       {
         path: "/update/:id",

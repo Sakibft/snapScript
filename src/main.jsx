@@ -7,17 +7,20 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
 // ..
 AOS.init();
 import {
- 
   RouterProvider,
 } from "react-router-dom";
 import AuthContextComponent from './providers/AuthContextComponent';
 import { Toaster } from 'react-hot-toast';
- 
+ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+ const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
      <AuthContextComponent>
+   <QueryClientProvider client={queryClient}>
      <RouterProvider router={router} />
-     <div><Toaster/></div>
+
+   </QueryClientProvider>
+      <Toaster/> 
      </AuthContextComponent>
   </React.StrictMode>,
 )
