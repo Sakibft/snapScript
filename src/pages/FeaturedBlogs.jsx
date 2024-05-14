@@ -18,7 +18,7 @@ const FeaturedBlogs = () => {
     })
   },[])
   return (
-    <div className="container mx-auto">
+    <div className="w-[60%] border-t border-b rounded-2xl border-primary mx-auto mt-6 mb-4">
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

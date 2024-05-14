@@ -35,8 +35,9 @@ const AllBlogs = () => {
   };
   // post wishlist in all blog page 
   const handleWishlist = item =>{
+    const blogid = item?._id;
     const {category,image,longDescription,shortDescription,title}=item;
-    const wishKor = {userEmail,category,image,longDescription,shortDescription,title}
+    const wishKor = {blogid,userEmail,category,image,longDescription,shortDescription,title}
     console.log(wishKor);
     axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
       headers: {
@@ -55,14 +56,15 @@ const AllBlogs = () => {
   return (
     <div>
       <div>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-5 mt-5 mb-5 ">
           <div>
             <select
               onChange={(e) => setFilter(e.target.value)}
               value={filter}
               name="category"
               id="category"
-              className="border p-4 rounded-lg"
+              className="p-4 rounded-lg border-l border-r border-primary shadow-blue-200 shadow-lg 
+              focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300"
             >
               <option value="">Filter By Category</option>
               <option value="Technology">Technology</option>
@@ -74,8 +76,8 @@ const AllBlogs = () => {
             </select>
           </div>
 
-          <form onSubmit={handleSearch}>
-            <div className="flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
+          <form onSubmit={handleSearch} className="shadow-blue-200 shadow-lg">
+            <div className="flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300 ">
               <input
                 className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
                 type="text"
@@ -84,7 +86,7 @@ const AllBlogs = () => {
                 aria-label="Enter Job Title"
               />
 
-              <button className="px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">
+              <button className="px-1 md:px-4 py-3 text-sm font-medium tracking-wider  uppercase border-t border-b border-primary rounded-md text-primary hover:border-primary hover:border-l hover:border-r">
                 Search
               </button>
             </div>
@@ -99,7 +101,7 @@ const AllBlogs = () => {
             return (
               <>
                 <div className="flex justify-center items-center">
-                  <div className="card w-96 bg-base-100 shadow-xl">
+                  <div className="card w-96 h-[500px] bg-base-100 shadow-lg">
                     <img className="h-52 w-full" src={item.image} alt="Shoes" />
                     <div className="card-body">
                       <h2 className="card-title">{item.category}</h2>

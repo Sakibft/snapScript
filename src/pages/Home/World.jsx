@@ -25,14 +25,14 @@ const World = () => {
   }, [filter, search]);
   // console.log(blogs);
   return (
-    <div className="mt-10 mb-10 w-[50%]   mx-auto">
+    <div className="mt-10 mb-10 md:w-[50%] w-[80%]   mx-auto">
        <h1 className="font-bold text-lg mb-[-10px] ">World News</h1>
        <progress className="progress progress-error w-[40%] h-1" value="30" max="100"></progress>
 
 
 
        <div>
-            <div className="grid grid-cols-1 justify-around container mx-auto gap-y-3">
+            <div className="grid grid-cols-1 gap-y-3">
           {fistSidData &&
             fistSidData.map((item) => {
               // console.log(item.image);
@@ -41,7 +41,7 @@ const World = () => {
                   <div className="flex justify-center items-center">
                     <div className="card w-full bg-base-100 shadow-xl">
                       <img
-                      className="h-96"
+                      className="md:h-[500px]"
                          src={item.image}
                         alt="Shoes"
                       />

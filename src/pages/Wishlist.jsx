@@ -42,19 +42,20 @@ const Wishlist = () => {
   }
 
   return (
-    <div>
+    <div className="w-[50%] mx-auto flex justify-center items-center">
+      <div className=" grid  grid-cols-2  mt-5 gap-4">
       {wish &&
         wish.map((item) => (
           <div key={item._id}>
-            <div className="flex justify-center items-center">
-              <div className="card w-96 bg-base-100 shadow-xl">
+      
+              <div className="card w-96 h-[500px] bg-base-100 shadow-lg">
                 <img className="h-52 w-full" src={item.image} alt="Shoes" />
                 <div className="card-body">
                   <h2 className="card-title">{item.category}</h2>
                   <p>{item.title}</p>
                   <p>{item.shortDescription}</p>
                   <div className="card-actions justify-end">
-                    <Link to={`/details/${item._id}`}>
+                  <Link to={`/details/${item.blogid}`}>
                           <button className="btn border-primary text-primary bg-white">Details</button>
                         </Link>
                         <button onClick={()=>handeDelete(item._id)}  className="btn text-2xl border border-[#F50057] text-[#F50057] bg-white"><MdOutlineDelete /></button>
@@ -62,8 +63,9 @@ const Wishlist = () => {
                 </div>
               </div>
             </div>
-          </div>
+       
         ))}
+    </div>
     </div>
   );
 };

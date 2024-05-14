@@ -49,16 +49,16 @@ const RecentBlog = () => {
   // const firstSixData = user.slice(0,8);
   return (
     <div>
-      <h1 className="text-center text-3xl font-bold mt-10 mb-10">Recent blog</h1>
+      <h1 className="text-center text-3xl font-bold  mb-10">Recent blog</h1>
       <div>
-        <div className="grid lg:grid-cols-3 justify-around container mx-auto gap-y-3">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-around container mx-auto gap-y-3">
           {fistSidData &&
             fistSidData.map((item) => {
               // console.log(item.image);
               return (
                 <>
                   <div className="flex justify-center items-center">
-                    <div className="card w-96 bg-base-100 shadow-xl">
+                    <div className="card w-96 h-[500px] bg-base-100  shadow-lg">
                       <img
                         className="h-52 w-full"
                         src={item.image}

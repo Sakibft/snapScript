@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 
 const Details = () => {
   const data = useLoaderData();
-  
+console.log(data);
   const { user } = UseAuth();
   const [comment, setComment] = useState();
   console.log(comment);
   const _id = data?._id;
   const photo = user?.photoURL;
   const name = user?.displayName;
- console.log(_id);
+  console.log(_id);
   // console.log(email,name);
   // console.log(data?.email, "data base email");
   // console.log(user?.email, "login user");
@@ -21,7 +21,7 @@ const Details = () => {
   const handleComment = (e) => {
     e.preventDefault();
     const comment = e.target.comment.value;
-    const newComment = {blogid:_id, name, photo, comment };
+    const newComment = { blogid: _id, name, photo, comment };
     axios
       .post(`${import.meta.env.VITE_API_URL}/comment`, newComment, {
         headers: {
@@ -74,7 +74,11 @@ const Details = () => {
                 <div className="rounded-lg bg-white font-sans shadow-lg">
                   <div className="px-2 py-2">
                     <div className="flex items-center gap-3 ">
-                      <img className="rounded-full w-8" src={cmnt.photo} alt="naiga" />
+                      <img
+                        className="rounded-full w-8"
+                        src={cmnt.photo}
+                        alt="naiga"
+                      />
                       <div className="flex flex-col">
                         <h2 className="font-semibold">{cmnt.name}</h2>
                         <p className=" text-blue-300">{cmnt.comment}</p>
@@ -84,21 +88,24 @@ const Details = () => {
                 </div>
               </div>
             ))}
+          {user?.email === data?.email ? (
+            <h1 className="text-red-500">Can not comment on own blog</h1>
+          ) : (
+            <form onSubmit={handleComment} className="w-96">
+              <label className="input  input-bordered flex items-center gap-2 ">
+                <input
+                  type="text"
+                  name="comment"
+                  className="grow  "
+                  placeholder="comment"
+                />
 
-          <form onSubmit={handleComment} className="w-96">
-            <label className="input  input-bordered flex items-center gap-2 ">
-              <input
-                type="text"
-                name="comment"
-                className="grow  "
-                placeholder="comment"
-              />
-
-              <button className="border  rounded-md btn    text-primary border-primary   bg-white  font-semibold">
-                Comment
-              </button>
-            </label>
-          </form>
+                <button className="border  rounded-md btn    text-primary border-primary   bg-white  font-semibold">
+                  Comment
+                </button>
+              </label>
+            </form>
+          )}
         </div>
       </div>
     </div>

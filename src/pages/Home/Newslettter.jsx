@@ -8,12 +8,12 @@ const Newslettter = () => {
   
   }
   return (
-    <div>
+    <div className="mb-5">
       <h1 className="text-center font-bold text-3xl mt-10 mb-10">Newsletter</h1>
 
       <div
         id="slide1"
-        className="carousel-item relative w-full flex justify-center items-center  "
+        className="carousel-item relative w-[80%]  flex justify-center items-center mx-auto  "
       >
         <img src={fsd} className="rounded-xl w-lg:[30%]" />
         <div className="absolute   lg:w-[30%]  h-full flex   justify-center   right-66 items-center">

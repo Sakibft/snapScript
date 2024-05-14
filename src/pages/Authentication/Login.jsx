@@ -66,7 +66,7 @@ const Login = () => {
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
-        className="container mx-auto flex  h-[700px] items-center justify-center mb-10 mt-4 border-2 hover:border-blue-300 duration-2000   rounded-2xl shadow-xl"
+        className="container mx-auto flex  h-[700px] items-center justify-center mb-10 mt-4 border-2 hover:border-primary duration-2000   rounded-2xl shadow-xl"
       >
         <div className=" w-full overflow-hidden rounded-xl   flex justify-center items-center   lg:h-[80%] ">
           {/* input side  */}
@@ -74,7 +74,7 @@ const Login = () => {
             <h2
               data-aos="fade-up"
               data-aos-duration="2000"
-              className="pb-8 text-center text-3xl font-bold text-[#8EA7E9]"
+              className="pb-8 text-center text-3xl font-bold text-primary"
             >
               Login Now !
             </h2>
@@ -83,12 +83,12 @@ const Login = () => {
               className="flex  w-full flex-col items-center justify-center gap-4"
             >
               <input
-                className="w-[80%] rounded-lg border border-[#8EA7E9] px-6 py-2 focus:outline-none focus:ring-2 focus:ring-[#8EA7E9]/50 md:w-[60%]"
+                className="w-[80%] rounded-lg border border-primary px-6 py-2 focus:outline-none focus:ring-2 focus:ring-[#8EA7E9]/50 md:w-[60%]"
                 type="email"
                 placeholder="Email"
                 name="email"
               />
-              <div className="w-[80%] rounded-lg border border-[#8EA7E9] px-6 py-2 focus:outline-none focus:ring-2 focus:ring-[#8EA7E9]/50 md:w-[60%] flex justify-between">
+              <div className="w-[80%] rounded-lg border border-primary px-6 py-2 focus:outline-none focus:ring-2 focus:ring-[#8EA7E9]/50 md:w-[60%] flex justify-between">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
@@ -118,13 +118,13 @@ const Login = () => {
                 Do not have an account ?
                 <Link
                   to="/register"
-                  className="text-[#8EA7E9] underline ml-1  "
+                  className="text-primary underline ml-1  "
                 >
                   Register
                 </Link>
               </p>
 
-              <button className="btn w-[80%] rounded-lg bg-[#8EA7E9] px-6 py-2 font-medium text-white md:w-[60%] text-xl">
+              <button className="btn w-[80%] rounded-lg bg-primary px-6 py-2 font-medium text-white md:w-[60%] text-xl">
                 Login
               </button>
             </form>
@@ -146,11 +146,11 @@ const Login = () => {
              <div 
              onClick={handleGoogle}
              className="mx-auto flex h-[50px] w-[200px] items-center overflow-hidden rounded-full shadow-md duration-300 hover:scale-95 hover:shadow">
-              <div className="flex h-full w-[50%] items-center bg-[#8EA7E9] pl-4 text-sm text-white">
+              <div className="flex h-full w-[50%] items-center bg-primary pl-4 text-sm text-white">
                 Sign With
               </div>
-              <span className="right-0 top-0 h-0 w-0 -rotate-90 border-b-[50px] border-r-[50px] border-b-transparent border-r-[#8EA7E9] group-hover:hidden"></span>
-              <span className="pr-4 text-4xl font-bold text-[#8EA7E9]">G+</span>
+              <span className="right-0 top-0 h-0 w-0 -rotate-90 border-b-[50px] border-r-[50px] border-b-transparent border-r-primary group-hover:hidden"></span>
+              <span className="pr-4 text-4xl font-bold text-primary">G+</span>
             </div>
           </div>
         </div>
