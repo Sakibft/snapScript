@@ -43,7 +43,7 @@ const Wishlist = () => {
 
   return (
     <div className="w-[50%] mx-auto flex justify-center items-center">
-      <div className=" grid  grid-cols-2  mt-5 gap-4">
+      <div className=" grid  lg:grid-cols-2  mt-5 gap-4">
       {wish &&
         wish.map((item) => (
           <div key={item._id}>

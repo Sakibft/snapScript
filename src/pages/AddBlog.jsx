@@ -1,15 +1,19 @@
 import axios from "axios";
 import UseAuth from "../hooks/UseAuth";
+import { useState } from "react";
 
  
 
 const AddBlog = () => {
-    const {user}=UseAuth()
+    const {user}=UseAuth();
+    // const [category,setCategory]=useState();
+    // console.log(category);
     console.log(user);
     const email = user?.email
      const ownerPhoto = user?.photoURL
     const owner = user?.displayName
     console.log(ownerPhoto,owner, 'jajahha');
+
       const handleSubmit = e => {
         e.preventDefault();
  
@@ -58,9 +62,25 @@ const AddBlog = () => {
                     <label className="label">
                             <span className="label-text">Category</span>
                         </label>
-                        <label className="input-group">
+                        <select
+            //   onChange={(e) => setCategory(e.target.value)}
+            //   value={category}
+              name="category"
+            //   id="category"
+              className="p-4 rounded-lg border-l border-r border-primary shadow-blue-200 shadow-lg 
+              focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300"
+            >
+              <option value=""></option>
+              <option value="Technology">Technology</option>
+              <option value="Sports">Sports</option>
+              <option value="Game">Game</option>
+              <option value="Travel">Travel</option>
+              <option value="Politics">Politics</option>
+              <option value="Health">Health</option>
+            </select>
+                        {/* <label className="input-group">
                             <input type="text" name="category" placeholder="Category" className="input input-bordered w-full" />
-                        </label>
+                        </label> */}
                     </div>
                     
                 </div>
@@ -70,7 +90,7 @@ const AddBlog = () => {
                         <label className="label">
                             <span className="label-text">Title</span>
                         </label>
-                        <label className="input-group">
+                        <label className="input-group shadow-blue-200 shadow-lg rounded-xl ">
                             <input type="text" name="title" placeholder="Title" className="input input-bordered w-full" />
                         </label>
                     </div>
@@ -78,7 +98,7 @@ const AddBlog = () => {
                         <label className="label">
                             <span className="label-text">Short Description</span>
                         </label>
-                        <label className="input-group">
+                        <label className="input-group  shadow-blue-200 shadow-lg rounded-xl">
                             <input type="text" name="shortDescription" placeholder="Short Description" className="input input-bordered w-full" />
                         </label>
                     </div>
@@ -89,7 +109,7 @@ const AddBlog = () => {
                         <label className="label">
                             <span className="label-text">Long Description</span>
                         </label>
-                        <label className="input-group">
+                        <label className="input-group  shadow-blue-200 shadow-lg rounded-xl">
                             <input type="text" name="longDescription" placeholder="Long Description" className="input input-bordered w-full" />
                         </label>
                     </div>
@@ -101,12 +121,12 @@ const AddBlog = () => {
                         <label className="label">
                             <span className="label-text">Photo URL</span>
                         </label>
-                        <label className="input-group">
+                        <label className="input-group  shadow-blue-200 shadow-lg rounded-xl">
                             <input type="text" name="photo" placeholder="Photo URL" className="input input-bordered w-full" />
                         </label>
                     </div>
                 </div>
-                <div className="w-[80%] mx-auto">
+                <div className="w-[80%] mx-auto  shadow-blue-200 shadow-lg rounded-xl">
 
 
                 <input type="submit" value="Add Blog" className="btn w-full  hover:bg-white hover:text-primary hover:border-primary border-r border-l border-primary bg-white" />

@@ -7,7 +7,7 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Link,   } from "react-router-dom";
 import UseAuth from "../../hooks/UseAuth";
 
- 
+
 
 const Login = () => {
   const {loginUser,loginWithGoogle}=UseAuth()
@@ -64,7 +64,7 @@ const Login = () => {
   return (
     <div>
       <div
-        data-aos="fade-up"
+      data-aos="fade-up"
         data-aos-duration="1000"
         className="container mx-auto flex  h-[700px] items-center justify-center mb-10 mt-4 border-2 hover:border-primary duration-2000   rounded-2xl shadow-xl"
       >

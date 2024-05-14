@@ -206,21 +206,16 @@ const Nav = () => {
               </button>
             </div>
           ) : (
-            <Link to="/login">
-              <div className="dropdown dropdown-hover">
-                <button className="btn w-24 bg-primary text-white hover:bg-primary">
-                  <BiLogIn className="text-lg" /> Login
-                </button>
-              </div>
-            </Link>
+            <div className="space-x-4">
+            <NavLink to="/register" className="btn bg-primary text-white">
+              Register
+            </NavLink>
+            <NavLink to="/login" className="btn bg-primary text-white">
+              Login
+            </NavLink>
+          </div>
           )}
-
-          {/* <Link to='/register'>
-       <button className="btn">Register</button>
-       </Link>
-       <Link to='/login'>
-       <button className="btn">Login</button>
-       </Link> */}
+ 
         </div>
       </div>
     </div>
