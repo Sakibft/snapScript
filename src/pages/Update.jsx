@@ -168,7 +168,7 @@ console.log(data);
               </label>
             </div>
           </div>
-          <input type="submit" value="Add Coffee" className="btn btn-block" />
+          <input type="submit" value="Update Blog" className="btn btn-block" />
         </form>
       </div>
     </div>
