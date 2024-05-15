@@ -83,7 +83,7 @@ const {mutateAsync} = useMutation({
 // get comment 
   const {data:comment,refetch} = useQuery ({
     queryFn: () => getCmnt(),
-    queryKey: ['getComment']
+    queryKey: ['getComment',_id]
   })
   console.log(comment);
 
