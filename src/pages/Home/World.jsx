@@ -51,7 +51,8 @@ const getData = async () => {
                       />
                       <div className="card-body">
                         <h2 className="text-lg bg-[#F50057] w-16 rounded-md text-center text-white">{item.category}</h2>
-                        <p>{item.title}</p>
+                        <p className="font-serif">Title : {item.title}</p>
+                        <hr />
                         <p>{item.shortDescription}</p>
                         <div className="card-actions justify-end">
                           <Link to={`/details/${item._id}`}>

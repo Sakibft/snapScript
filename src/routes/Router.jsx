@@ -61,8 +61,8 @@ const router = createBrowserRouter([
             <Update></Update>
           </Private>
         ),
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/update/${params.id}`),
+        // loader: ({ params }) =>
+        //   fetch(`${import.meta.env.VITE_API_URL}/update/${params.id}`),
       },
     ],
   },

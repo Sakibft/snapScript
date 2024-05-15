@@ -1,10 +1,34 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const Update = () => {
-  const data = useLoaderData()
-  const {_id,email,category,title,shortDescription,longDescription,image} = data;
 
+  const {id} = useParams();
+  console.log(id);
+// get update data 
+  const {data} = useQuery({
+    queryFn:()=> getUpdateData(),
+    queryKey:['details',id],
+    initialData:[]
+  })
+console.log(data);
+  const getUpdateData = async () => {
+    const {data} = await axios(`${import.meta.env.VITE_API_URL}/update/${id}`)
+    return data ;
+  }
+  const {_id,email,category,title,shortDescription,longDescription,image} = data;
+ 
+  const {mutateAsync} = useMutation({
+    mutationFn: async ({blogs}) => {
+   const {data} =  await axios.put(`${import.meta.env.VITE_API_URL}/realUpdate/${_id}`, blogs)
+   console.log(data);
+    },
+    onSuccess: () => {
+      toast.success('update successfully')
+    }
+  })
 
 
   const handleSubmit = e => {
@@ -27,17 +51,19 @@ const Update = () => {
   
     console.log(blogs);
   
-    axios.put(`${import.meta.env.VITE_API_URL}/realUpdate/${_id}`, blogs, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log('Data successfully posted:', response.data);
-      })
-      .catch(error => {
-        console.error('Error posting data:', error);
-      });
+    // axios.put(`${import.meta.env.VITE_API_URL}/realUpdate/${_id}`, blogs, {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    //   .then(response => {
+    //     console.log('Data successfully posted:', response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error posting data:', error);
+    //   });
+      // p
+      mutateAsync({blogs})
   };
 
 

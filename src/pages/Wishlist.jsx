@@ -4,7 +4,8 @@ import UseAuth from "../hooks/UseAuth";
 import { Link } from "react-router-dom";
 import { MdOutlineDelete } from "react-icons/md";
 import useAxiosSecure from "../components/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const Wishlist = () => {
   // const [wish, setWish] = useState();
@@ -16,8 +17,8 @@ const Wishlist = () => {
   // console.log(wish);
   const url = `/wish/${user?.email}`
 
-
-  const {data : wish } = useQuery({
+// get wish
+  const {data : wish,refetch } = useQuery({
     queryFn : () => getData() ,
     queryKey: ['wishData']
   })
@@ -38,18 +39,41 @@ return data;
   //   axiosSecure.get(url)
   //   .then(res => setWish(res.data))
   // }, [url,axiosSecure]);
+
+
+
+  const {mutateAsync} = useMutation({
+mutationFn: async ({_id})=> {
+  const { data } = await axios.delete(
+    `${import.meta.env.VITE_API_URL}/delete/${_id}`
+  )
+  console.log(data);
+},
+onSuccess: () => {
+  toast.success('Deleted 💔')
+  refetch()
+}
+  })
+
+
+
+
+
   const handeDelete = async (_id) => {
  
-      const getData = async () => {
+      // const getData = async () => {
       
-        const { data } = await axios.delete(
-          `${import.meta.env.VITE_API_URL}/delete/${_id}`
-        );
-        setDlt(data.data);
-        console.log(data,'hahahah');
-      };
-      getData();
+      //   const { data } = await axios.delete(
+      //     `${import.meta.env.VITE_API_URL}/delete/${_id}`
+      //   );
+      //   setDlt(data.data);
+      //   console.log(data,'hahahah');
+      // };
+      // getData();
     
+   
+      mutateAsync({_id})
+
     console.log(_id);
   }
 

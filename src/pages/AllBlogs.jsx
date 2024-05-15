@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import UseAuth from "../hooks/UseAuth";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const AllBlogs = () => {
   // const [blogs, setBlogs] = useState();
@@ -52,24 +53,39 @@ console.log(isLoading);
     setSearch(text);
     // console.log(text);
   };
+
+const {mutateAsync} = useMutation({
+  mutationFn: async ({wishKor}) => {
+ const {data} =   axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor)
+ console.log(data);
+  },
+  onSuccess:() => {
+    toast.success('Added wishlist')
+  }
+})
+
+
+
+
+
   // post wishlist in all blog page 
   const handleWishlist = item =>{
     const blogid = item?._id;
     const {category,image,longDescription,shortDescription,title}=item;
     const wishKor = {blogid,userEmail,category,image,longDescription,shortDescription,title}
     console.log(wishKor);
-    axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log('Data successfully posted:', response.data);
-      })
-      .catch(error => {
-        console.error('Error posting data:', error);
-      });
-
+    // axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    //   .then(response => {
+    //     console.log('Data successfully posted:', response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error posting data:', error);
+    //   });
+      mutateAsync({wishKor})
     console.log(item);
   }
   return (
@@ -124,7 +140,8 @@ console.log(isLoading);
                     <img className="h-52 w-full" src={item.image} alt="Shoes" />
                     <div className="card-body">
                       <h2 className="card-title">{item.category}</h2>
-                      <p>{item.title}</p>
+                      <p className="font-serif"> Title : {item.title}</p>
+                      <hr />
                       <p>{item.shortDescription}</p>
                       <div className="card-actions justify-end">
                         <Link to={`/details/${item._id}`}>

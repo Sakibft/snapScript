@@ -84,7 +84,8 @@ console.log(SixData);
                       />
                       <div className="card-body">
                         <h2 className="card-title">{item.category}</h2>
-                        <p>{item.title}</p>
+                        <p className="font-serif">{item.title}</p>
+                        <hr />
                         <p>{item.shortDescription}</p>
                         <div className="card-actions justify-end">
                           <Link to={`/details/${item._id}`}>

@@ -1,13 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import UseAuth from "../hooks/UseAuth";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+ 
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const Details = () => {
-  const [comment, setComment] = useState();
+  // const [comment, setComment] = useState();
   const {id} = useParams();
   // console.log(id,'useParams');
+  // get details
 const {data} = useQuery({
   queryFn:()=> getData(),
   queryKey:['details',id],
@@ -22,7 +24,7 @@ const getData = async () => {
   // const data = useLoaderData();
 console.log(data,'details');
   const { user } = UseAuth();
-  console.log(comment);
+  // console.log(comment);
   const _id = data?._id;
   const photo = user?.photoURL;
   const name = user?.displayName;
@@ -30,37 +32,77 @@ console.log(data,'details');
   // console.log(email,name);
   // console.log(data?.email, "data base email");
   // console.log(user?.email, "login user");
-  // post comment
+ 
+
+ // post comment 
+const {mutateAsync} = useMutation({
+  mutationFn: async({newComment}) => {
+  const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/comment`, newComment)
+  console.log(data);
+  },
+  onSuccess: () => {
+    
+    toast.success('comment done ')
+    refetch()
+  }
+})
+
 
   const handleComment = (e) => {
     e.preventDefault();
     const comment = e.target.comment.value;
     const newComment = { blogid: _id, name, photo, comment };
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/comment`, newComment, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        // setComment(response.data)
-        console.log("Data successfully posted:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error posting data:", error);
-      });
+    // axios
+    //   .post(`${import.meta.env.VITE_API_URL}/comment`, newComment, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //   .then((response) => {
+    //     // setComment(response.data)
+    //     console.log("Data successfully posted:", response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error posting data:", error);
+    //   });
     console.log(newComment);
+    mutateAsync({newComment})
   };
-  useEffect(() => {
-    axios(`${import.meta.env.VITE_API_URL}/comment/${_id}`)
-      .then((res) => {
-        setComment(res.data);
-        // console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [_id]);
+//   const {data : wish,refetch } = useQuery({
+//     queryFn : () => getData() ,
+//     queryKey: ['wishData']
+//   })
+
+//   console.log(wish);
+//   const getData =  async () => {
+// const {data} = await axiosSecure.get(url)
+// return data;
+//   }
+
+
+// get comment 
+  const {data:comment,refetch} = useQuery ({
+    queryFn: () => getCmnt(),
+    queryKey: ['getComment']
+  })
+  console.log(comment);
+
+const getCmnt = async () => {
+ const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/comment/${_id}`)
+ return data;
+}
+
+  // useEffect(() => {
+  //   axios(`${import.meta.env.VITE_API_URL}/comment/${_id}`)
+  //     .then((res) => {
+  //       setComment(res.data);
+  //       // console.log(res);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [_id])
+
   return (
     <div className="flex justify-center items-center">
       <div className="card md:w-1/2  bg-base-100 shadow-xl">
@@ -68,9 +110,11 @@ console.log(data,'details');
           <img src={data?.image} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{data.category}</h2>
-          <p>{data.title}</p>
-          <p>{data.shortDescription}</p>
+          <h2 className="card-title ">category : <span className="text-primary">  {data.category}</span> </h2>
+          <p className="font-serif"> Title : {data.title}</p>
+          <hr />
+          <p className="text-gray-500">{data.shortDescription}</p>
+
           <p>{data.longDescription}</p>
           <div className="card-actions justify-end">
             {user?.email === data?.email && ( // Check if the logged-in user's email matches the email in the data

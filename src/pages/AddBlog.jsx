@@ -1,6 +1,7 @@
 import axios from "axios";
 import UseAuth from "../hooks/UseAuth";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
  
 
@@ -13,6 +14,23 @@ const AddBlog = () => {
      const ownerPhoto = user?.photoURL
     const owner = user?.displayName
     console.log(ownerPhoto,owner, 'jajahha');
+
+
+const {mutateAsync} = useMutation({
+mutationFn: async ({blogs}) => {
+  const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/blogs`, blogs, {
+  })
+  console.log(data);
+} ,
+onSuccess: () => {
+  toast.success('Blog Added successfully')
+  console.log('added successfully');
+}
+})
+
+
+
+
 
       const handleSubmit = e => {
         e.preventDefault();
@@ -32,17 +50,21 @@ const AddBlog = () => {
           ownerPhoto:ownerPhoto
         };
         console.log(blogs);
-        axios.post(`${import.meta.env.VITE_API_URL}/blogs`, blogs, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(response => {
-            console.log('Data successfully posted:', response.data);
-          })
-          .catch(error => {
-            console.error('Error posting data:', error);
-          });
+        // axios.post(`${import.meta.env.VITE_API_URL}/blogs`, blogs, {
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   }
+        // })
+        //   .then(response => {
+        //     console.log('Data successfully posted:', response.data);
+        //   })
+        //   .catch(error => {
+        //     console.error('Error posting data:', error);
+        //   });
+
+
+      mutateAsync({blogs})
+
       };
       
 
