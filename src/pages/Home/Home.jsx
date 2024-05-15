@@ -1,3 +1,4 @@
+import Recomand from "../../components/Recomand";
 import Banner from "./Banner";
 import Faq from "./Faq";
 import Newslettter from "./Newslettter";
@@ -16,6 +17,7 @@ const Home = () => {
       <div>
         <World></World>
       </div>
+     <Recomand></Recomand>
       <div>
         <Faq></Faq>
       </div>
