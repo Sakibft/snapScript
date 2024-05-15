@@ -1,36 +1,36 @@
 import axios from "axios";
-import { FirebaseError } from "firebase/app";
-import { useEffect, useState } from "react";
+// import { FirebaseError } from "firebase/app";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UseAuth from "../../hooks/UseAuth";
 import { useQuery } from "@tanstack/react-query";
-
+import { motion } from "framer-motion";
 const RecentBlog = () => {
- 
   // const [blogs, setBlogs] = useState([]);
   // const [filter, setFilter] = useState([]);
   // const [search, setSearch] = useState([]);
-  const {user}=UseAuth();
+  const { user } = UseAuth();
   const userEmail = user?.email;
   // const fistSidData = blogs.slice(3,9)
   // console.log(fistSidData);
 
-
-  const {data : blogs ,isLoading,refetch,isError,error} = useQuery({
+  const {
+    data: blogs,
+    isLoading,
+    refetch,
+    isError,
+    error,
+  } = useQuery({
     queryFn: () => getData(),
-    queryKey:['allBlogData']
-   })
- console.log(blogs);
-   const getData = async () => {
-    const { data } = await axios(
-      `${
-        import.meta.env.VITE_API_URL
-      }/blogs`
-    )
-    return data
+    queryKey: ["allBlogData"],
+  });
+  console.log(blogs);
+  const getData = async () => {
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/blogs`);
+    return data;
   };
-  const SixData = blogs?.slice(3,9)
-console.log(SixData);
+  const SixData = blogs?.slice(3, 9);
+  console.log(SixData);
 
   // useEffect(() => {
   //   const getData = async () => {
@@ -43,25 +43,33 @@ console.log(SixData);
   //   };
   //   getData();
   // }, [filter, search]);
-// post wishlist
-  const handleWishlist = item =>{
-    const {category,image,longDescription,shortDescription,title}=item;
-    const wishKor = {userEmail,category,image,longDescription,shortDescription,title}
+  // post wishlist
+  const handleWishlist = (item) => {
+    const { category, image, longDescription, shortDescription, title } = item;
+    const wishKor = {
+      userEmail,
+      category,
+      image,
+      longDescription,
+      shortDescription,
+      title,
+    };
     console.log(wishKor);
-    axios.post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log('Data successfully posted:', response.data);
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/wish`, wishKor, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch(error => {
-        console.error('Error posting data:', error);
+      .then((response) => {
+        console.log("Data successfully posted:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error posting data:", error);
       });
 
     console.log(item);
-  }
+  };
 
   // console.log(blogs);
   // const firstSixData = user.slice(0,8);
@@ -87,11 +95,22 @@ console.log(SixData);
                         <p className="font-serif">{item.title}</p>
                         <hr />
                         <p>{item.shortDescription}</p>
-                        <div className="card-actions justify-end">
+                        <div className="card-actions justify-end gap-5">
                           <Link to={`/details/${item._id}`}>
-                            <button className="btn text-[#F50057] border-[#F50057] bg-white">Details</button>
+                            <motion.dev
+                                whileHover={{ scale: 1.2 }}
+                             className="btn text-[#F50057] border-[#F50057] bg-white">
+                              Details
+                            </motion.dev>
                           </Link>
-                          <button onClick={()=>handleWishlist(item)} className="btn border-primary text-primary bg-white">Wishlist</button>
+                          {/* <button onClick={()=>handleWishlist(item)} className="btn border-primary text-primary bg-white">Wishlist</button> */}
+                          <motion.div
+                            whileHover={{ scale: 1.2 }}
+                            className="btn border-primary text-primary bg-white"
+                            onClick={() => handleWishlist(item)}
+                          >
+                            Wishlist
+                          </motion.div>
                         </div>
                       </div>
                     </div>
