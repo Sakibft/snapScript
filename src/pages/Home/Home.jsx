@@ -1,3 +1,4 @@
+// import Language from "../../components/Language";
 import Recomand from "../../components/Recomand";
 import Banner from "./Banner";
 import Faq from "./Faq";
@@ -8,12 +9,16 @@ import World from "./World";
 const Home = () => {
   return (
     <div>
+      {/* <div>
+        <Language></Language>
+      </div> */}
       <div>
         <Banner></Banner>
       </div>
       <div>
         <RecentBlog></RecentBlog>
       </div>
+     
       <div>
         <World></World>
       </div>
