@@ -1,4 +1,6 @@
  name => SnapScript 
+
+ Server site => https://github.com/Sakibft/snapScript-Server
  
  live => https://p-register-and-login.web.app
 
