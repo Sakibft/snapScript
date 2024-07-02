@@ -1,3 +1,18 @@
+
+ ## Getting Started
+
+First, run the Project :
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+ 
  name => SnapScript 
 
  Server site => https://github.com/Sakibft/snapScript-Server
